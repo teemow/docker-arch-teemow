@@ -1,4 +1,4 @@
-FROM teemow/arch
+FROM dock0/arch
 MAINTAINER Timo Derstappen, teemow@gmail.com
 
 RUN pacman -Sy --noconfirm zsh git vim sudo
@@ -19,6 +19,9 @@ RUN ln -s /usr/bin/vim /usr/bin/vi
 # Set locale
 RUN locale-gen --no-purge de_DE.UTF-8
 ENV LANG de_DE.UTF-8
+
+RUN rm /etc/localtime
+RUN ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 
 ENV SHELL /bin/zsh
 ENV HOME /home/teemow
