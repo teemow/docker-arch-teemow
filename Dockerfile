@@ -1,9 +1,11 @@
-FROM dock0/arch
+FROM teemow/arch
 MAINTAINER Timo Derstappen, teemow@gmail.com
 
 RUN pacman -Sy --noconfirm zsh git vim sudo
 RUN useradd -s /bin/zsh teemow
 RUN echo "teemow      ALL = NOPASSWD: ALL" >> /etc/sudoers
+
+RUN pacman -Sy --noconfirm sed
 RUN git clone --recursive https://github.com/sorin-ionescu/prezto.git /home/teemow/.zprezto
 RUN find /home/teemow/.zprezto/runcoms/ -name "z*" -exec basename {} \; | while read filename; do cp /home/teemow/.zprezto/runcoms/$filename /home/teemow/.$filename; done
 RUN chown -R teemow.teemow /home/teemow
